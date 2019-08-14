@@ -4,11 +4,10 @@ import {Card} from "react-bootstrap";
 const Number = props => {
 
     return (
-        <Card bg="danger" text="white" style={{width: '18rem'}}>
+        <Card bg="danger" text="white" style={{width: '400px'}}>
             <Card.Body>
                 <Card.Text style={{
-                    fontSize: 'xx-large',
-                    height: '18rem'
+                    fontSize: '180px',
                 }}>
                     {props.number}
                 </Card.Text>

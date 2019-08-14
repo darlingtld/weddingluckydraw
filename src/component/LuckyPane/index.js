@@ -14,15 +14,18 @@ class LuckyPane extends Component {
         this.setState({
             isNumberRolling: true
         });
-        this.interval = setInterval(() => {
-            const number = this.getRandomInt(0, 200);
-            this.setState({number: number})
+        if (!this.interval) {
+            this.interval = setInterval(() => {
+                const number = this.getRandomInt(0, 200);
+                this.setState({number: number})
 
-        }, 100);
+            }, 100);
+        }
     }
 
     stopRolling() {
         clearInterval(this.interval);
+        this.interval = null;
     }
 
     getRandomInt(min, max) {
