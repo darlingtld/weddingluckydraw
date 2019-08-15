@@ -10,38 +10,66 @@ class LuckyPane extends Component {
 
     state = {
         number: 0,
-        isNumberRolling: false
+        isNumberRolling: false,
+        isMultipleNumberProcessRunning: false
     }
 
     startRolling() {
         this.setState({
-            isNumberRolling: true
+            isNumberRolling: true,
         });
         if (!this.interval) {
             this.interval = setInterval(() => {
-                let number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
-                while (this.props.gradeInfo['three'].includes[number] || this.props.gradeInfo['two'].includes[number] || this.props.gradeInfo['one'].includes[number]) {
-                    number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
-                }
-                this.setState({number: number})
+                this.setState({number: this.getUniqueNumber()})
             }, 100);
         }
     }
 
     stopRolling() {
-        this.setState({
-            isNumberRolling: false
-        });
         clearInterval(this.interval);
         this.interval = null;
-        this.props.gradeInfo[this.props.gradeInfo['currentLevel']].push(this.state.number);
-        this.props.changeGradeInfo(this.props.gradeInfo);
+        let numberForOneClick = this.props.gradeInfo[this.props.gradeInfo['currentLevel']]['numberForOneClick'];
+        if (numberForOneClick === 1) {
+            this.setState({
+                isNumberRolling: false
+            });
+            this.props.gradeInfo[this.props.gradeInfo['currentLevel']]['numberList'].push(this.state.number);
+            this.props.changeGradeInfo(this.props.gradeInfo);
+        } else {
+            if (this.state.isMultipleNumberProcessRunning) {
+                return;
+            }
+            this.setState({isMultipleNumberProcessRunning: true});
+            const numberForOneClickInterval = setInterval(() => {
+                if (numberForOneClick-- <= 1) {
+                    clearInterval(numberForOneClickInterval);
+                    this.setState({
+                        isNumberRolling: false,
+                        isMultipleNumberProcessRunning: false
+                    });
+                }
+                this.props.gradeInfo[this.props.gradeInfo['currentLevel']]['numberList'].push(this.state.number);
+                this.props.changeGradeInfo(this.props.gradeInfo);
+                if (numberForOneClick > 0) {
+                    this.setState({number: this.getUniqueNumber()});
+
+                }
+            }, 1000);
+        }
+
+    }
+
+    getUniqueNumber() {
+        let number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
+        while (this.props.gradeInfo['three']['numberList'].includes(number) || this.props.gradeInfo['two']['numberList'].includes(number) || this.props.gradeInfo['one']['numberList'].includes(number)) {
+            number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
+        }
+        return number;
     }
 
     getRandomInt(min, max) {
         //cryptographic strong number from range [0, 1)
         let random = () => crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
-
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(random() * (max - min + 1)) + min;

@@ -11,9 +11,18 @@ class App extends Component {
     state = {
         gradeInfo: {
             currentLevel: 'three',
-            three: [],
-            two: [],
-            one: [],
+            three: {
+                numberList: [],
+                numberForOneClick: 5,
+            },
+            two: {
+                numberList: [],
+                numberForOneClick: 1,
+            },
+            one: {
+                numberList: [],
+                numberForOneClick: 1,
+            },
             minNumber: 1,
             maxNumber: 188
         }
