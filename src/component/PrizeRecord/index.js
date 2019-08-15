@@ -1,18 +1,27 @@
 import React from 'react';
 
 const PrizeRecord = props => {
-    console.log(props);
     return (
         <div style={{
             position: 'absolute',
             bottom: '100px',
             left: '20px',
             color: 'white',
-            textAlign: 'left'
+            textAlign: 'left',
+            width: '600px'
         }}>
-            <p style={{fontSize:'large'}}>三等奖：{props.gradeInfo['three'].join(", ")}</p>
-            <p style={{fontSize:'x-large'}}>二等奖：{props.gradeInfo['two'].join(", ")}</p>
-            <p style={{fontSize:'xx-large'}}>一等奖：{props.gradeInfo['one'].join(", ")}</p>
+            <div style={{width:'100%', float:'left'}}>
+                <p style={{fontSize: '30px', float: 'left', height: '70px'}}>三等奖：</p><p
+                style={{fontSize: '30px'}}>{props.gradeInfo['three'].join(", ")}</p>
+            </div>
+            <div style={{width:'100%', float:'left'}}>
+                <p style={{fontSize: '40px', float: 'left', height: '70px'}}>二等奖：</p><p
+                style={{fontSize: '40px'}}>{props.gradeInfo['two'].join(", ")}</p>
+            </div>
+            <div style={{width:'100%', float:'left'}}>
+                <p style={{fontSize: '50px', float: 'left', height: '70px'}}>一等奖：</p><p
+                style={{fontSize: '50px'}}>{props.gradeInfo['one'].join(", ")}</p>
+            </div>
         </div>
     )
 };
