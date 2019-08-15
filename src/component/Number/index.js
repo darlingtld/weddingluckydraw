@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Image} from "react-bootstrap";
+import {Image} from "react-bootstrap";
 import outline from '../../asset/outline.png';
 
 const Number = props => {
@@ -9,7 +9,8 @@ const Number = props => {
             <Image src={outline} width='400px'/>
             <div style={{
                 fontSize: '180px',
-                marginTop: '-430px'
+                marginTop: '-430px',
+                color:'red'
             }}>{props.number}</div>
         </div>
     )

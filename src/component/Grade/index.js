@@ -39,9 +39,10 @@ class Grade extends Component {
                 bottom: 0,
                 right: 0,
                 fontSize: '100px',
-                color: 'palegoldenrod',
+                color: 'red',
                 marginRight: '100px',
-                marginBottom: '50px'
+                marginBottom: '50px',
+                fontFamily:'STKaiti'
             }}
                  onClick={() => this.gradeUp()}>{this.state.grade}
             </div>

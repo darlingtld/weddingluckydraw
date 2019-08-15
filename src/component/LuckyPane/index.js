@@ -81,7 +81,7 @@ class LuckyPane extends Component {
                 <Number number={this.state.number}/>
                 <div style={{
                     position: 'fixed',
-                    width: '20%',
+                    width: '400px',
                     marginTop: '140px'
                 }}>
                     {!this.state.isNumberRolling ?
