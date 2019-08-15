@@ -5,6 +5,7 @@ import startImg from '../../asset/start1.png';
 import stopImg from '../../asset/stop.png';
 
 class LuckyPane extends Component {
+
     interval = null;
 
     state = {
@@ -18,9 +19,11 @@ class LuckyPane extends Component {
         });
         if (!this.interval) {
             this.interval = setInterval(() => {
-                const number = this.getRandomInt(0, 200);
+                let number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
+                while (this.props.gradeInfo['three'].includes[number] || this.props.gradeInfo['two'].includes[number] || this.props.gradeInfo['one'].includes[number]) {
+                    number = this.getRandomInt(this.props.gradeInfo['minNumber'], this.props.gradeInfo['maxNumber']);
+                }
                 this.setState({number: number})
-
             }, 100);
         }
     }
@@ -36,9 +39,12 @@ class LuckyPane extends Component {
     }
 
     getRandomInt(min, max) {
+        //cryptographic strong number from range [0, 1)
+        let random = () => crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
+
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(random() * (max - min + 1)) + min;
     }
 
     render() {

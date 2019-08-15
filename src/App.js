@@ -13,7 +13,9 @@ class App extends Component {
             currentLevel: 'three',
             three: [],
             two: [],
-            one: []
+            one: [],
+            minNumber: 1,
+            maxNumber: 188
         }
     };
 
@@ -31,8 +33,9 @@ class App extends Component {
                         top: 0,
                         left: 0
                     }}/>
-                    <PrizeRecord gradeInfo={this.state.gradeInfo} />
-                    <Grade gradeInfo={this.state.gradeInfo} changeGradeInfo={(gradeInfo) => this.changeGradeInfo(gradeInfo)}/>
+                    <PrizeRecord gradeInfo={this.state.gradeInfo}/>
+                    <Grade gradeInfo={this.state.gradeInfo}
+                           changeGradeInfo={(gradeInfo) => this.changeGradeInfo(gradeInfo)}/>
                 </div>
                 <div className="App-body">
                     <Image src={foreverLoveImg} width='600px' height='125px' style={{marginTop: '-100px'}}/>
