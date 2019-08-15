@@ -1,18 +1,17 @@
 import React from 'react';
-import {Card} from "react-bootstrap";
+import {Card, Image} from "react-bootstrap";
+import outline from '../../asset/outline.png';
 
 const Number = props => {
 
     return (
-        <Card bg="danger" text="white" style={{width: '400px'}}>
-            <Card.Body>
-                <Card.Text style={{
-                    fontSize: '180px',
-                }}>
-                    {props.number}
-                </Card.Text>
-            </Card.Body>
-        </Card>
+        <div>
+            <Image src={outline} width='400px'/>
+            <div style={{
+                fontSize: '180px',
+                marginTop: '-430px'
+            }}>{props.number}</div>
+        </div>
     )
 };
 
